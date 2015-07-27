@@ -1,0 +1,6 @@
+pushbullet:
+  apikey: your_apikey_here
+
+smtp:
+  port: 25252
+
