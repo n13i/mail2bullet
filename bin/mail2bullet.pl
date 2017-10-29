@@ -42,7 +42,16 @@ $smtp->reg_cb(
 
             my $subject = $email->header('Subject');
             $subject .= ' (from <' . $mail->{from} . '>)';
-            my $body = decode('7bit-jis', $email->body);
+
+            my $body = undef;
+            if($email->header('Content-Type') =~ /charset=\"?utf-8\"?/i)
+            {
+                $body = decode('utf-8', $email->body);
+            }
+            else
+            {
+                $body = decode('7bit-jis', $email->body);
+            }
             print $body;
 
             $pb->push_note({
